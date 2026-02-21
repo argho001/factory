@@ -195,7 +195,11 @@ app.post('/api/orders', (req, res) => {
     res.status(201).json(newOrder);
 });
 
-// Start Server
-app.listen(PORT, () => {
-    console.log(`Backend server running on http://localhost:${PORT}`);
-});
+// Export for Vercel Serverless or Run Local
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Backend server running on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
